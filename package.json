@@ -8,7 +8,8 @@
     "clean": "rimraf ./dist && mkdir dist",
     "prebuild": "npm run clean",
     "build": "webpack --mode production",
-    "postbuild": "echo I run after the build script"
+    "postbuild": "echo I run after the build script",
+    "start":"webpack-dev-server --mode development"
   },
   "keywords": [],
   "author": "",
@@ -30,7 +31,8 @@
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
     "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
   },
   "dependencies": {
     "@babel/runtime": "^7.1.2"

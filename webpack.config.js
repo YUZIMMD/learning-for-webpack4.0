@@ -1,7 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
 module.exports = {
   // 指定打包入口
   entry: './src/index.js',
@@ -26,7 +27,8 @@ module.exports = {
           filename:'[name].[hash:8].css',
           chunkFilename:'[name].[hash:8].css'
       }),
-      new CleanWebpackPlugin(['dist'])
+      new CleanWebpackPlugin(['dist']),
+      new webpack.HotModuleReplacementPlugin()
   ],
   module:{
     rules: [
@@ -34,7 +36,8 @@ module.exports = {
         {
           test: /\.less$/,
           use: [
-            MiniCssExtractPlugin.loader,
+            // MiniCssExtractPlugin.loader,
+            'style-loader'
             'css-loader',
             {
               loader: 'postcss-loader',
@@ -114,5 +117,13 @@ module.exports = {
     },
     extensions: ['.wasm', '.mjs', '.js', '.json', '.jsx'],
     modules: [path.resolve(__dirname, 'src'), 'node_modules']
+  },
+  //配置开发服务器
+  devServer: {
+    port: 1234,
+    open: true, // 自动打开浏览器
+    compress: true ,// 服务器压缩
+    hot: true
+    //... proxy、hot
   }
 }
