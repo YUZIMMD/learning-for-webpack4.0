@@ -34,10 +34,24 @@ module.exports = {
     rules: [
         // ...
         {
+          test: /\.css$/,
+          include: [path.resolve(__dirname, 'src')],
+          use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: [require('autoprefixer')]
+              }
+            }
+          ]
+        },
+        {
           test: /\.less$/,
           use: [
             // MiniCssExtractPlugin.loader,
-            'style-loader'
+            'style-loader',
             'css-loader',
             {
               loader: 'postcss-loader',
